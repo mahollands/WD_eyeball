@@ -9,6 +9,9 @@ FOLDER_IN = "test_spectra/"
 # output file name
 FOUT = f"SDSS_spectra_{USER}.csv"
 
+# image and panel sizes
+IM_W, IM_H, PANEL_W = 1131, 800, 369
+
 # go to next spectrum if top-class is QSO or bottom class is blank
 AUTOJUMP = True
 

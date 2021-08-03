@@ -12,7 +12,7 @@ cmdfont = pygame.font.SysFont("monospace", 24, bold=True)
 genfont = pygame.font.SysFont("monospace", 17, bold=True)
 errfont = pygame.font.SysFont("arial", 60, bold=True)
 
-panel_size = panel_w, panel_h = 1500-1131-1, 800  # -1 for black line
+panel_size = panel_w, panel_h = cfg.PANEL_W-1, cfg.IM_H  # -1 for black line
 
 
 def help_top_level(iname, N):
@@ -130,9 +130,9 @@ def basic_panel(iname, N):
     string = "Spectral classifier"
     title = titlefont.render(string, 1, clr.BLACK)
     text_size = titlefont.size(string)
-    side_panel.blit(title, ((panel_size[0]-text_size[0])/2, 50))
+    side_panel.blit(title, ((panel_size[0]-text_size[0])//2, 50))
     if cfg.PROGRESS_BAR:
-        side_panel.blit(progress_bar(iname, N), (30, 760))
+        side_panel.blit(progress_bar(iname, N), (30, cfg.IM_H-40))
     return side_panel
 
 
@@ -166,7 +166,7 @@ def blit_generic(side_panel):
 
 
 def progress_bar(iname, N):
-    PW, PH = 308, 20
+    PW, PH = panel_w-60, 20
 
     prog_bar = pygame.Surface((PW, PH))
     prog_bar.fill(clr.WHITE)

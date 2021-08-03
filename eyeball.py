@@ -33,7 +33,7 @@ def setup_data():
 def setup_display():
     pygame.display.init()
     pygame.display.set_caption("eyeball")
-    size = 1500, 800  # .gif is 1131x800
+    size = cfg.IM_W+cfg.PANEL_W, cfg.IM_H
     screen = pygame.display.set_mode(size)
     pygame.font.init()
     myfont = pygame.font.SysFont("arial", 40)
@@ -48,21 +48,21 @@ def draw_frame(display, data, ispec, ispec_prev, CLS2_MODE):
         Picture = pygame.image.load(fname_full).convert()
         print(fname)
     ispec_prev = ispec
-    display.screen.blit(Picture, (display.width-1131, 0))
+    display.screen.blit(Picture, (display.width-cfg.IM_W, 0))
 
     # indicate top level classification at top left
     if data.cls1[ispec] != '':
         label = display.font.render(data.cls1[ispec], 1, clr.RED)
         text_size = display.font.size(data.cls1[ispec])
-        display.screen.blit(label, (1150-text_size[0], 50))
+        display.screen.blit(label, (display.width-350-text_size[0], 50))
 
     # indicate bottom level classification (inform in blue if awaiting input)
     if CLS2_MODE:
         label = display.font.render("awaiting input", 1, clr.BLUE)
-        display.screen.blit(label, (1200, 50))
+        display.screen.blit(label, (display.width-300, 50))
     elif data.cls2[ispec] != '':
         label = display.font.render(data.cls2[ispec], 1, clr.RED)
-        display.screen.blit(label, (1200, 50))
+        display.screen.blit(label, (display.width-300, 50))
 
     # help panel
     help_fn = cls2_help_functions[data.cls1[ispec]] if CLS2_MODE else help_top_level
